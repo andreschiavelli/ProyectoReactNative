@@ -3,14 +3,13 @@ import firebase from 'firebase';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBBzbZcuKczVCD0sWyHLNfU9nFAPe5TwhQ",
-  authDomain: "proyecto-react-native-6c2c4.firebaseapp.com",
-  projectId: "proyecto-react-native-6c2c4",
-  storageBucket: "proyecto-react-native-6c2c4.appspot.com",
-  messagingSenderId: "205894965206",
-  appId: "1:205894965206:web:1f0809002519290757b677"
+  apiKey: "AIzaSyBPxj5C_ViBbNXcgC6msq-tLz-SLqKoRAs",
+  authDomain: "proyectoreactnative-d5f71.firebaseapp.com",
+  projectId: "proyectoreactnative-d5f71",
+  storageBucket: "proyectoreactnative-d5f71.appspot.com",
+  messagingSenderId: "67131813772",
+  appId: "1:67131813772:web:f93da57abd283d73e6b0a9"
 };
-
 
 app.initializeApp(firebaseConfig);
 
