@@ -10,6 +10,7 @@ class PostForm extends Component{
             textoPost:'',
         }
     }
+    
     submitPost(){
         console.log('posteando...');
         db.collection('posts').add({
