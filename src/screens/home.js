@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput} from 'react-native';
 import { db, auth } from '../firebase/config';
-import Post from '../components/Post';
+import Post from '../components/post';
 
 
 class Home extends Component{
