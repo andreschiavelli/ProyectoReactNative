@@ -16,7 +16,8 @@ class Menu extends Component{
         super();
         this.state = {
             loggedIn:false,
-            user:''
+            user:'',
+            errorMessage:''
         }
     }
     
@@ -31,13 +32,20 @@ class Menu extends Component{
         })
     }
 
-    register(email, pass){
+    register(email, pass, userName){
         auth.createUserWithEmailAndPassword(email, pass)
-            .then( ()=>{
-                console.log('Registrado');
-            })
+            .then( 
+                (res)=>{
+                    console.log(res);
+                    res.user.updateProfile({
+                        displayName: userName})
+             
+                    })
             .catch( error => {
                 console.log(error);
+                this.setState({
+                    errorMessage:error,
+                })
             })
     }
 
@@ -68,7 +76,7 @@ class Menu extends Component{
             <NavigationContainer>
             {this.state.loggedIn == false ?
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Registro" component={()=><Register register={(email, pass)=>this.register(email, pass)} />} />
+                    <Drawer.Screen name="Registro" component={()=><Register register={(email, pass, userName)=>this.register(email, pass, userName)} errorMessage={this.state.errorMessage}/>} />
                    
                     <Drawer.Screen name="Login" component={()=><Login login={(email, pass)=>this.login(email, pass)} />}/>
                 </Drawer.Navigator> :

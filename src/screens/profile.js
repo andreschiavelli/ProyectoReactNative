@@ -8,10 +8,14 @@ class Profile extends Component{
       
     }
   }
+  componentDidMount(){
+ console.log(this.props.userData)
+}
   render(){
     return(
       <View style={styles.container}>
           <Text style={styles.welcome}> Bienvenido: {this.props.userData.email}</Text>
+          <Text style={styles.welcome}> Bienvenido: {this.props.userData.displayName}</Text>
           <Text style={styles.element}> Usuario creado el: {this.props.userData.metadata.creationTime}</Text>
           <Text style={styles.element}> Último login: {this.props.userData.metadata.lastSignInTime}</Text>
           <TouchableOpacity style={styles.touchable} onPress={()=>this.props.logout()}>
