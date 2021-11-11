@@ -46,7 +46,7 @@ class Menu extends Component{
             .then( response => {
                 this.setState({
                     loggedIn: true,
-                    user:response.user,
+                    user: response.user,
                 })
             })
             .catch(e => console.log(e))

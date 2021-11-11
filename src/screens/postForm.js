@@ -1,81 +1,92 @@
-import { NavigationRouteContext } from "@react-navigation/native";
-import React, {Component} from "react";
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
-import { auth, db } from '../firebase/config'
+import { NavigationRouteContext } from '@react-navigation/core';
+import React, {Component} from 'react';
+import {Text, TouchableOpacity, View, StyleSheet, TextInput} from 'react-native';
+import { db, auth } from '../firebase/config';
+import MyCamera from '../components/myCamera';
 
-class PostForm extends Component{
-    constructor(props){
-        super(props)
-        this.state={
-            textoPost:'',
-        }
+class PostForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {  
+            textoPost: '',
+            showCamera: true,
+            url: '',
+        };
     }
-    
+
     submitPost(){
         console.log('posteando...');
         db.collection('posts').add({
             owner: auth.currentUser.email,
             texto: this.state.textoPost,
             createdAt: Date.now(),
+            photo: this.state.url,
         })
-        .then( ()=>{ //Limpiar el form de carga
+        .then( () =>{
             this.setState({
-                textoPost:'',
+                textoPost: '',
             })
-            //Redirección
             this.props.drawerProps.navigation.navigate('Home')
         })
         .catch()
     }
 
-    render(){
-        return(
-            <View style={styles.formContainer}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text)=>this.setState({textoPost: text})}
-                    placeholder='Escribí aquí'
-                    keyboardType='default'
-                    multiline
-                    value={this.state.textoPost}    
-                    />
-                <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
-                    <Text style={styles.textButton}>Guardar</Text>    
-                </TouchableOpacity>
-            </View>
-        )
+    onImageUpload(url){
+        this.setState({
+            showCamera: false,
+            url: url,
+        })
+    }
+    
+    render() {
+        return (
+        <View style={styles.wrap}>
+        {
+            this.state.showCamera ?
+            <MyCamera onImageUpload={(url) => {this.onImageUpload(url)}}/> :
+        
+        <View>
+            <TextInput style={styles.field} 
+            keyboardType='default'
+            placeholder='Escriba aqui'
+            multiline
+            value={this.state.textoPost}
+            onChangeText={ text => this.setState({textoPost:text}) }/>
+ 
+            <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
+                    <Text>Guardar</Text>    
+            </TouchableOpacity>
+        </View>
+        }
+        </View>
+        );
     }
 }
-
 const styles = StyleSheet.create({
-    formContainer:{
-        paddingHorizontal:10,
-        marginTop: 20,
+    wrap:{
+        flex: 1,
     },
-    input:{
-        height:100,
-        paddingVertical:15,
+    field:{
+        Altura: 200,
+        paddingVertical: 15,
         paddingHorizontal: 10,
-        borderWidth:1,
-        borderColor: '#ccc',
+        borderWidth: 1,
+        borderColor:'#ccc',
         borderStyle: 'solid',
         borderRadius: 6,
-        marginVertical:10,
+        marginVertical: 10,
+
     },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor: '#28a745',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
+        borderRadius: 4,
+        borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
-    },
-    textButton:{
-        color: '#fff'
+        borderColor: '#28a745',
     }
-
 })
 
 export default PostForm;
