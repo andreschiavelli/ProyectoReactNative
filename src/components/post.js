@@ -86,10 +86,9 @@ class Post extends Component{
              <Text>user: {this.props.postData.data.owner} </Text>  
             <Text>Likes: {this.state.likes} </Text> 
             <View style={styles.img}>Photo:  
-            {this.props.postData.data.photo ?
-            <Image 
+             <Image 
                 style={styles.img}
-                source={{uri:this.props.postData.data.photo}}/> :''}
+                source={{uri:this.props.postData.data.photo}}/>
             </View> 
              {/* Cambio de botones me gusta/ me dejó de gustar */}
             {
@@ -156,7 +155,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     img:{
-        flex:1
+        height:100 
     },
     modalContainer:{
         width: '97%',
