@@ -57,7 +57,10 @@ class MyCamera extends Component {
     }
 
     clear(){
-
+     this.setState({
+         photo:'',
+         showCamera:true,
+     })
     }
 
     render() {
