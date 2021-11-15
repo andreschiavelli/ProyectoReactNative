@@ -18,10 +18,11 @@ class MyCamera extends Component {
         Camera.requestCameraPermissionsAsync()
             .then( () =>{
                 this.setState({
-                    permission: true
+                    permission: true,
+                    
                 })
             })
-        .catch( error => console.log(error))
+            .catch( error => console.log(error))
     }
 
     takePicture(){
