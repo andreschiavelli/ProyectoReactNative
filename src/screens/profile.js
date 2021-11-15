@@ -8,6 +8,7 @@ class Profile extends Component{
       
     }
   }
+<<<<<<< HEAD
   componentDidMount(){
     db.collection('postsForm').where('owner', '==', auth.currentUser.email).orderBy('createdAt, DSC').onSnapshot(
       docs => {
@@ -17,16 +18,35 @@ class Profile extends Component{
             id: doc.id,   
             data: doc.data(),
           })
+=======
+  // componentDidMount(){
+  //   db.collection('posts').orderBy('createdAt, ASC').onSnapshot(
+  //     docs => {
+  //       let posts = [];
+  //       docs.forEach( doc => {
+  //         posts.push({
+  //           id: doc.id,   
+  //           data: doc.data(),
+  //         })
+>>>>>>> d8def7ab39fdeb1bee21f6dc5914455b16833901
         
-      })
-    })
-  }
+  //     })
+  //   })
+  // }
         
+<<<<<<< HEAD
   eliminarPosteo(){
     db.collection('posts').doc(this.props.postData.id).delete({
       
    })
   }
+=======
+  // eliminarPosteo(){
+  //   db.collection('posts').doc(this.props.postData.id).delete({
+  //     comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
+  //  })
+  // }
+>>>>>>> d8def7ab39fdeb1bee21f6dc5914455b16833901
   
   render(){
     return(
