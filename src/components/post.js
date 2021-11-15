@@ -89,11 +89,12 @@ class Post extends Component{
              <Text>Texto del post: {this.props.postData.data.texto}</Text>
              <Text>user: {this.props.postData.data.owner} </Text>  
             <Text>Likes: {this.state.likes} </Text> 
-            <View>Photo: {this.state.likes} </View> 
+            <View style={styles.img}>Photo:  
+            {this.props.postData.data.photo ?
             <Image 
                 style={styles.img}
-                source={this.props.postData.data.photo}
-            />
+                source={{uri:this.props.postData.data.photo}}/> :''}
+            </View> 
              {/* Cambio de botones me gusta/ me dejó de gustar */}
             {
                 this.state.myLike == false ?
