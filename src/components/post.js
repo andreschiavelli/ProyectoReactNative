@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< Updated upstream
-import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, Image} from 'react-native';
-=======
-import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, FlatList} from 'react-native';
->>>>>>> Stashed changes
+import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, Image, FlatList} from 'react-native';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 
@@ -158,10 +154,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
     },
-<<<<<<< Updated upstream
     img:{
         flex:1
-=======
+    },
     modalContainer:{
         width: '97%',
         borderRadius: 4,
@@ -178,7 +173,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         borderRadius: 4,
         paddingHorizontal: 8,
->>>>>>> Stashed changes
     }
 })
 
