@@ -1,26 +1,32 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput} from 'react-native';
 import { db, auth } from '../firebase/config';
+import Post from '../components/post';
+
 class Profile extends Component{
   constructor(props){
     super(props);
     this.state ={
-      
+      posteos: [],
     }
   }
-  // componentDidMount(){
-  //   db.collection('posts').orderBy('createdAt, ASC').onSnapshot(
-  //     docs => {
-  //       let posts = [];
-  //       docs.forEach( doc => {
-  //         posts.push({
-  //           id: doc.id,   
-  //           data: doc.data(),
-  //         })
-        
-  //     })
-  //   })
-  // }
+  componentDidMount(){
+    db.collection('postsForm').where('owner', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
+      docs => {
+        let posts = [];
+        docs.forEach( doc => {
+          posts.push({
+            id: doc.id,   
+            data: doc.data(),
+          })
+        })
+
+        this.setState({
+          posteos: posts,
+        })
+      }
+    )
+  }
         
   // eliminarPosteo(){
   //   db.collection('posts').doc(this.props.postData.id).delete({
@@ -35,7 +41,13 @@ class Profile extends Component{
           <Text style={styles.welcome}> Bienvenido: {this.props.userData.displayName}</Text>
           <Text style={styles.element}> Usuario creado el: {this.props.userData.metadata.creationTime}</Text>
           <Text style={styles.element}> Último login: {this.props.userData.metadata.lastSignInTime}</Text>
+          <Text>Mis posteos:  <FlatList 
+          data= { this.state.posteos }
+          keyExtractor = { post => post.id}
+          renderItem = { ({item}) => <Post postData={item} />}
+        /> </Text>
           <TouchableOpacity style={styles.touchable} onPress={()=>this.props.logout()}>
+
             <Text style={styles.touchableText}>Logout</Text>
           </TouchableOpacity>         
       </View>       
