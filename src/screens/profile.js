@@ -18,8 +18,17 @@ class Profile extends Component{
             data: doc.data(),
           })
         
-        }
-      }      
+        
+      })
+    })
+  }
+        
+  eliminarPosteo(){
+    db.collection('posts').doc(this.props.postData.id).delete({
+      comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
+   })
+
+  }
   render(){
     return(
       <View style={styles.container}>
