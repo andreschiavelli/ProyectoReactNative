@@ -6,67 +6,70 @@ import Post from '../components/post';
 
 class Home extends Component{
   constructor(props){
-    super(props);
-    this.state ={
-      posteos: [],
-    }
+      super(props)
+      this.state={
+          posteos: [],
+      }
   }
 
   componentDidMount(){
-    db.collection('posts').onSnapshot(
-      docs => {
-        let posts = [];
-        docs.forEach( doc => {
-          posts.push({
-            id: doc.id,   
-            data: doc.data(),
-          })
-        })
+      db.collection('posts').onSnapshot(
+          docs => {
+              let posts = [];
+              docs.forEach(doc => {
+                  posts.push({
+                      id: doc.id,
+                      data: doc.data(),
+                  })
+              })
+              console.log(posts);
 
-        this.setState({
-          posteos: posts,
-        })
-      }
-    )
+              this.setState({
+                  posteos: posts,
+              })
+          }
+      )
   }
 
+
   render(){
-    return(
-      <View style={styles.container}>
-        <FlatList 
-          data= { this.state.posteos }
-          keyExtractor = { post => post.id}
-          renderItem = { ({item}) => <Post postData={item} />}
-        />
-      </View>
+      return (
+          <View style={styles.container}>
+          <FlatList 
+                  data= {this.state.posteos}
+                  keyExtractor= {post => post.id}
+                  renderItem = { ({item}) => <Post postData={item} />}
+              />
+          </View>    
       )
   }
 }
 
 const styles = StyleSheet.create({
   container:{
-    paddingHorizontal:10,
+      paddingHorizontal: 10,
   },
   formContainer:{
-    backgroundColor: '#ccc',
-    marginHorizontal: 10,
-    padding:10,
+      backgroundColor: 'grey',
+      marginHorizontal: 10,
+      padding: 10,
   },
   field:{
-    borderColor: '#444',
-    borderWidth:1,
-    borderStyle: 'solid',
-    height: 20,
-    paddingHorizontal: 20,
-    paddingVertical:10
+      borderColor: '#444',
+      borderWidth: 1,
+      borderStyle: 'solid',
+      height: 20,
+      paddingHorizontal: 10,
+      paddingVertical: 10,
   },
   image:{
-    height: 250,
+      height: 250,
   },
   touchable:{
-    backgroundColor: '#ccc',
-    borderRadius:4,
-    marginVertical:10,
+      backgroundColor: '#ccc',
+      borderRadius: 4,
+      marginVertical: 5,
+      textAlign: 'center',
   }
 })
 
