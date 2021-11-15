@@ -28,11 +28,13 @@ class Profile extends Component{
     )
   }
         
-  // eliminarPosteo(){
-  //   db.collection('posts').doc(this.props.postData.id).delete({
-  //     comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
-  //  })
-  // }
+  eliminarPosteo(){
+    db.collection('postsForm').doc(this.props.postData.id).delete()
+    .then((res)=>{
+      console.log('post borrado', res);
+     })
+     .catch((error)=> console.log(error)
+    )}
   
   render(){
     return(
