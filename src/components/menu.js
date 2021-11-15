@@ -11,90 +11,83 @@ import { auth } from '../firebase/config';
 
 const Drawer = createDrawerNavigator();
 
-class Menu extends Component {
-    constructor() {
+class Menu extends Component{
+    constructor(){
         super();
-        this.state = {  
-            loggedIn: false,
-            userData: [],
-            errorMessage: {},
-            errorCode:'',
-        };
+        this.state = {
+            loggedIn:false,
+            user:'',
+            errorMessage:''
+        }
     }
-
+    
     componentDidMount(){
-        auth.onAuthStateChanged(user =>{
+        auth.onAuthStateChanged(user => {
             if(user){
-            this.setState({
-                loggedIn: true,
-                user: user,
-            })
+                this.setState({
+                    loggedIn:true,
+                    user: user,
+                })
             }
         })
     }
 
-    register(email, pass){
+    register(email, pass, userName){
         auth.createUserWithEmailAndPassword(email, pass)
-        .then(() => {
-            console.log('Registrado');
-         })     
-        .catch(error => {
-          console.log(error);
-          this.setState({
-            errorMessage: error.message,
-            errorCode: error.code,
-        })
-        })
-    
+            .then( 
+                (res)=>{
+                    console.log(res);
+                    res.user.updateProfile({
+                        displayName: userName})
+             
+                    })
+            .catch( error => {
+                console.log(error);
+                this.setState({
+                    errorMessage:error,
+                })
+            })
     }
 
-    login(email, pass){
-        auth.signInWithEmailAndPassword(email, pass)
-        .then((response) =>{
-            console.log('Logueado');
-            console.log(response);
-            this.setState({
-                loggedIn: true,
-                userData: response.user,
+    login(email,pass){
+        auth.signInWithEmailAndPassword(email,pass)
+            .then( response => {
+                this.setState({
+                    loggedIn: true,
+                    user: response.user,
+                })
             })
-        })
-        .catch(error => {
-            console.log(error);
-            this.setState({
-                errorMessage: error.message,
-                errorCode: error.code,
-            })
-        })
+            .catch(e => console.log(e))
     }
 
     logout(){
         auth.signOut()
-        .then( ()=>{
-            this.setState({
-                loggedIn:false,
-                user:'',
+            .then( (res)=>{
+                this.setState({
+                    user:'',
+                    loggedIn: false,
+                })
             })
-        })
-        .catch()
+            .catch()
     }
 
-    render() {
-        return (
-            this.state.loggedIn == false ?
-                <NavigationContainer>
-                    <Drawer.Navigator>
-                        <Drawer.Screen name='Login' component={() => <Login login={(email, pass) => this.login(email, pass)} errorMessage={this.state.errorMessage} errorCode={this.state.errorCode} />} />
-                        <Drawer.Screen name='Register' component={() => <Register register={(email, pass) => this.register(email, pass)} errorMessage={this.state.errorMessage} errorCode={this.state.errorCode} />} />
-                    </Drawer.Navigator>
-                </NavigationContainer> :
-                <NavigationContainer>
-                    <Drawer.Navigator>
-                        <Drawer.Screen name="Home" component={() => <Home />}/>
-                        <Drawer.Screen name="New Post" component={(drawerProps) => <PostForm drawerProps={drawerProps}/>}/>
-                        <Drawer.Screen name="Mi Perfil" component={() => <Perfil logout={() => this.logout()} userData={this.state.user}/>}/>
-                    </Drawer.Navigator>
-                </NavigationContainer>
-        );
+    render(){
+        return(
+            <NavigationContainer>
+            {this.state.loggedIn == false ?
+                <Drawer.Navigator>
+                    <Drawer.Screen name="Registro" component={()=><Register register={(email, pass, userName)=>this.register(email, pass, userName)} errorMessage={this.state.errorMessage}/>} />
+                   
+                    <Drawer.Screen name="Login" component={()=><Login login={(email, pass)=>this.login(email, pass)} />}/>
+                </Drawer.Navigator> :
+                <Drawer.Navigator>
+                     <Drawer.Screen name="Home" component={()=><Home />} />
+                     <Drawer.Screen name ="New Post" component={(drawerProps)=><PostForm drawerProps={drawerProps}/>}/>
+                      <Drawer.Screen name="Perfil" component={()=><Perfil userData={this.state.user} logout={()=>this.logout() } />} />
+                </Drawer.Navigator>
+            }
+            </NavigationContainer>
+        )
     }
 }
 

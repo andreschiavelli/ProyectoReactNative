@@ -48,7 +48,7 @@ class PostForm extends Component {
         <View>
             <TextInput style={styles.field} 
             keyboardType='default'
-            placeholder='EscribÃ­ aqui'
+            placeholder='Escriba aqui'
             multiline
             value={this.state.textoPost}
             onChangeText={ text => this.setState({textoPost:text}) }/>
