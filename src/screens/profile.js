@@ -9,8 +9,17 @@ class Profile extends Component{
     }
   }
   componentDidMount(){
- console.log(this.props.userData)
-}
+    db.collection('posts').orderBy('createdAt, ASC').onSnapshot(
+      docs => {
+        let posts = [];
+        docs.forEach( doc => {
+          posts.push({
+            id: doc.id,   
+            data: doc.data(),
+          })
+        
+        }
+      }      
   render(){
     return(
       <View style={styles.container}>
