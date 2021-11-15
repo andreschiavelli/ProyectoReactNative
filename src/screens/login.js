@@ -27,6 +27,8 @@ class Login extends Component{
                     keyboardType='email-address'
                     secureTextEntry={true}
                 />
+                <Text style={styles.textError}> {this.props.errorMessage.message}</Text>
+
                 <TouchableOpacity style={styles.button} onPress={()=>this.props.login(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Ingresar</Text>    
                 </TouchableOpacity>
@@ -62,7 +64,11 @@ const styles = StyleSheet.create({
     },
     textButton:{
         color: '#fff'
-    }
+    },
+    textError:{
+        color: 'red',
+         
+     }
 
 })
 
