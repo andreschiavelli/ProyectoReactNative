@@ -81,14 +81,13 @@ class Menu extends Component{
             <NavigationContainer>
             {this.state.loggedIn == false ?
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Registro" component={()=><Register register={(email, pass, userName)=>this.register(email, pass, userName)} errorMessage={this.state.errorMessage}/>} />
-                   
                     <Drawer.Screen name="Login" component={()=><Login login={(email, pass)=>this.login(email, pass)} errorMessage={this.state.errorMessage}/>}/>
+                    <Drawer.Screen name="Registro" component={()=><Register register={(email, pass, userName)=>this.register(email, pass, userName)} errorMessage={this.state.errorMessage}/>} />
                 </Drawer.Navigator> :
                 <Drawer.Navigator>
-                     <Drawer.Screen name="Home" component={()=><Home />} />
-                     <Drawer.Screen name ="New Post" component={(drawerProps)=><PostForm drawerProps={drawerProps}/>}/>
-                      <Drawer.Screen name="Perfil" component={()=><Perfil userData={this.state.user} logout={()=>this.logout() } />} />
+                    <Drawer.Screen name="Home" component={()=><Home />} />
+                    <Drawer.Screen name ="New Post" component={(drawerProps)=><PostForm drawerProps={drawerProps}/>}/>
+                    <Drawer.Screen name="Perfil" component={()=><Perfil userData={this.state.user} logout={()=>this.logout() } />} />
                 </Drawer.Navigator>
             }
             </NavigationContainer>

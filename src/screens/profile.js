@@ -8,25 +8,25 @@ class Profile extends Component{
       
     }
   }
-  componentDidMount(){
-    db.collection('posts').orderBy('createdAt, ASC').onSnapshot(
-      docs => {
-        let posts = [];
-        docs.forEach( doc => {
-          posts.push({
-            id: doc.id,   
-            data: doc.data(),
-          })
+  // componentDidMount(){
+  //   db.collection('posts').orderBy('createdAt, ASC').onSnapshot(
+  //     docs => {
+  //       let posts = [];
+  //       docs.forEach( doc => {
+  //         posts.push({
+  //           id: doc.id,   
+  //           data: doc.data(),
+  //         })
         
-      })
-    })
-  }
+  //     })
+  //   })
+  // }
         
-  eliminarPosteo(){
-    db.collection('posts').doc(this.props.postData.id).delete({
-      comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
-   })
-  }
+  // eliminarPosteo(){
+  //   db.collection('posts').doc(this.props.postData.id).delete({
+  //     comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
+  //  })
+  // }
   
   render(){
     return(
