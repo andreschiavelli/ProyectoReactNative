@@ -18,7 +18,6 @@ class Profile extends Component{
             data: doc.data(),
           })
         
-        
       })
     })
   }
@@ -27,8 +26,8 @@ class Profile extends Component{
     db.collection('posts').doc(this.props.postData.id).delete({
       comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
    })
-
   }
+  
   render(){
     return(
       <View style={styles.container}>

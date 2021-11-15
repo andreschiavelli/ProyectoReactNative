@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     },
     textError:{
         color: 'red',
-         
      }
 
 })
