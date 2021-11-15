@@ -82,7 +82,6 @@ class Post extends Component{
     render(){
         return(
             <View style={styles.contanier}>
-<<<<<<< HEAD
              <Text>Texto del post: {this.props.postData.data.texto}</Text>
              <Text>user: {this.props.postData.data.owner} </Text>  
             <Text>Likes: {this.state.likes} </Text> 
@@ -91,19 +90,6 @@ class Post extends Component{
                 style={styles.img}
                 source={{uri:this.props.postData.data.photo}}/>
             </View> 
-=======
-                <Text>Texto del post: {this.props.postData.data.texto}</Text>
-                <Text>user: {this.props.postData.data.owner} </Text>  
-                <Text>Likes: {this.state.likes} </Text> 
-            
-                <View style={styles.img}>  
-                    {this.props.postData.data.photo ?
-                    <Image 
-                    style={styles.img}
-                    source={{uri:this.props.postData.data.photo}}/> :''}
-                </View> 
-            
->>>>>>> cba4a5e7ce971f75621ffbc746cfc4704e8bff63
              {/* Cambio de botones me gusta/ me dejó de gustar */}
             {
                 this.state.myLike == false ?
