@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput} from 'react-native';
-
+import { db, auth } from '../firebase/config';
 class Profile extends Component{
   constructor(props){
     super(props);
@@ -9,7 +9,7 @@ class Profile extends Component{
     }
   }
   componentDidMount(){
-    db.collection('posts').orderBy('createdAt, ASC').onSnapshot(
+    db.collection('postsForm').where('owner', '==', auth.currentUser.email).orderBy('createdAt, DSC').onSnapshot(
       docs => {
         let posts = [];
         docs.forEach( doc => {
@@ -24,7 +24,7 @@ class Profile extends Component{
         
   eliminarPosteo(){
     db.collection('posts').doc(this.props.postData.id).delete({
-      comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
+      
    })
   }
   

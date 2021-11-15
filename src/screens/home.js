@@ -13,7 +13,7 @@ class Home extends Component{
   }
 
   componentDidMount(){
-    db.collection('posts').onSnapshot(
+    db.collection('postsForm').onSnapshot(
       docs => {
         let posts = [];
         docs.forEach( doc => {

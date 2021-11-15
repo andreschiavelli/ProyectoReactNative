@@ -80,12 +80,13 @@ class Post extends Component{
     }
 
     render(){
+        console.log(this.props.postData.data.photo)
         return(
             <View style={styles.contanier}>
              <Text>Texto del post: {this.props.postData.data.texto}</Text>
              <Text>user: {this.props.postData.data.owner} </Text>  
             <Text>Likes: {this.state.likes} </Text> 
-            <View style={styles.img}>Photo:  
+            <View style={styles.img}>  
              <Image 
                 style={styles.img}
                 source={{uri:this.props.postData.data.photo}}/>

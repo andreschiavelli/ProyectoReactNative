@@ -16,7 +16,7 @@ class PostForm extends Component {
 
     submitPost(){
         console.log('posteando...');
-        db.collection('posts').add({
+        db.collection('postsForm').add({
             owner: auth.currentUser.email,
             texto: this.state.textoPost,
             createdAt: Date.now(),
