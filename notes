@@ -1,2 +1,5 @@
 - Ordenar por fecha de creación el Home.
 - Mostrar en MiPerfil la cantidad de posteos del usuario.
+- Mostrar en MiPerfil todos posteos del usuario (permitir borrado)
+- Si no hay comentarios, mostrar:  “Aún no hay comentarios. Sé el primero en opinar.”
+- Buscador de usuarios
