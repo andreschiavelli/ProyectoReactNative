@@ -89,7 +89,7 @@ class Post extends Component{
              <Text>Texto del post: {this.props.postData.data.texto}</Text>
              <Text>user: {this.props.postData.data.owner} </Text>  
             <Text>Likes: {this.state.likes} </Text> 
-            <Text>Photo: {this.state.likes} </Text> 
+            <View>Photo: {this.state.likes} </View> 
             <Image 
                 style={styles.img}
                 source={this.props.postData.data.photo}
