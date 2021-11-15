@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, Image} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, Image, FlatList} from 'react-native';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 
@@ -31,8 +31,7 @@ class Post extends Component{
         })
         .then(()=>{
             this.setState({
-                likes:this.props.postData.data.likes.length,
-                //likes:this.state.likes + 1, //Opción más rápida de respuesta
+                likes:this.state.likes + 1,
                 myLike: true,
             })
         })
@@ -45,8 +44,7 @@ class Post extends Component{
         })
         .then(()=>{
             this.setState({
-                likes:this.props.postData.data.likes.length,
-                //likes:this.state.likes + 1, //Opción más rápida de respuesta
+                likes:this.state.likes - 1,
                 myLike: false,
             })
         })
@@ -74,13 +72,11 @@ class Post extends Component{
          db.collection('posts').doc(this.props.postData.id).update({
            comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
         })
-
-        //Armar el comentario que vamos a guardar.  
-            //Conseguir el estado
-
-        //Guardarlo en un colección: modifacer un documento
-
-        //limpiar el estado
+        .then( () =>{
+            this.setState({
+                comment: '',
+            })
+        })
     }
 
     render(){
@@ -112,16 +108,20 @@ class Post extends Component{
 
             {/* Modal para comentarios */}
             {   this.state.showModal ?
-                <Modal
-                    visible={this.state.showModal}
-                    animationType='slide'
-                    transparent={false}
-                >   
-                    <TouchableOpacity onPress={()=>this.hideModal()}>
-                        <Text>X</Text>
+                    <Modal style={styles.modalContainer}
+                        visible= {this.state.showModal}
+                        animationType= 'slide'
+                        transparent= {false}
+                    >   
+                    <TouchableOpacity onPress={() => this.hideModal()}>
+                        <Text style={styles.closeButton}>X</Text>
                     </TouchableOpacity> 
-                    <Text>Dentro del modal</Text>
-
+                    
+                    <FlatList 
+                        data={this.props.postData.data.comments}
+                        keyExtractor={ comment => comment.createdAt.toString()}
+                        renderItem= {({item}) => <Text>{item.author}:{item.comment}</Text>}
+                    />
                     {/* Formulario para nuevo comentarios */}
                     <View>
                         <TextInput placeholder="Comentar..."
@@ -157,6 +157,23 @@ const styles = StyleSheet.create({
     },
     img:{
         flex:1
+    },
+    modalContainer:{
+        width: '97%',
+        borderRadius: 4,
+        padding: 5,
+        alignSelf: 'centre',
+        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
+        marginTop: 20, 
+        marginBottom: 10,
+    },
+    closeButton:{
+        color: '#fff',
+        backgroundColor: '#dc3545',
+        padding: 5,
+        alignSelf: 'flex-end',
+        borderRadius: 4,
+        paddingHorizontal: 8,
     }
 })
 
