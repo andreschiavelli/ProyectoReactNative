@@ -81,7 +81,7 @@ class Post extends Component{
     
 
     render(){
-        console.log(this.props.postData.data.photo)
+        console.log(this.props.postData)
         return(
             <View style={styles.contanier}>
              <Text>Texto del post: {this.props.postData.data.texto}</Text>
@@ -138,7 +138,11 @@ class Post extends Component{
 
                 </Modal>    :
                 <Text></Text>
+
             }
+            <TouchableOpacity onPress={()=>{this.props.eliminarPosteo(this.props.postData.id)}}>
+                            <Text>Eliminar Posteo</Text>
+                        </TouchableOpacity>
         </View>   
         )
     }

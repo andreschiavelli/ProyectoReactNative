@@ -9,8 +9,28 @@ class Home extends Component{
     super(props);
     this.state ={
       posteos: [],
-    }
+      filterBy:'', 
+      // usuarios: [],
+        }
   }
+//   evitarSubmit(e){
+//     e.preventDefault();
+//     console.log('Evitando el envío')
+// }
+
+// controlarCambios(event){
+//     this.setState({
+//         filterBy: event.target.value 
+//     }, () => this.props.filtrarUsuarios(this.state.filterBy)) 
+           
+//  }
+// filtrarUsuarios(text){
+//   let artistasFiltrados = this.state.artistasIniciales.filter( artista => artista.name.toLowerCase().includes(text.toLowerCase())); 
+//   this.setState({
+//       artistas: artistasFiltrados  
+//   })
+ 
+// }
 
   componentDidMount(){
     db.collection('postsForm').onSnapshot(
@@ -22,7 +42,6 @@ class Home extends Component{
             data: doc.data(),
           })
         })
-
         this.setState({
           posteos: posts,
         })
@@ -32,7 +51,11 @@ class Home extends Component{
 
   render(){
     return(
+   
       <View style={styles.container}>
+           {/* <Text> <form action="Buscar por Nombre" onSubmit={(submit)=>this.evitarSubmit(submit)}> 
+      <input type="text" onChange={(filtrado)=>this.controlarCambios(filtrado)} value={this.state.filterBy} placehoder='ingrese su nombre'/>
+      </form></Text> */}
         <FlatList 
           data= { this.state.posteos }
           keyExtractor = { post => post.id}

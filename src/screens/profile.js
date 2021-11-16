@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput} from 'react-native';
 import { db, auth } from '../firebase/config';
-import Post from '../components/post';
+import Post from '../components/postUsuario';
 
 class Profile extends Component{
   constructor(props){
@@ -28,10 +28,12 @@ class Profile extends Component{
     )
   }
         
-  eliminarPosteo(){
-    db.collection('postsForm').doc(this.props.postData.id).delete()
+  eliminarPosteo(id){
+    db.collection('postsForm').doc(id).delete()
     .then((res)=>{
-      console.log('post borrado', res);
+      this.setState({
+        posts:posteos,
+      })
      })
      .catch((error)=> console.log(error)
     )}
@@ -46,7 +48,7 @@ class Profile extends Component{
           <Text>Mis posteos:  <FlatList 
           data= { this.state.posteos }
           keyExtractor = { post => post.id}
-          renderItem = { ({item}) => <Post postData={item} />}
+          renderItem = { ({item}) => <Post postData={item} eliminarPosteo= {(id)=>this.eliminarPosteo(id)}/>}
         /> </Text>
           <TouchableOpacity style={styles.touchable} onPress={()=>this.props.logout()}>
 
