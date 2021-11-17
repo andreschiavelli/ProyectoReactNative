@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderStyle: 'solid',
         borderColor: 'gray',
-      },
+    },
 
 })
 

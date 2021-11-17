@@ -8,7 +8,7 @@ class Post extends Component{
         super(props);
         this.state = {
            likes: 0,
-           myLike:false,
+           myLike: false,
            showModal: false, //Para la vista del modal
            comment:'', //para limpiar el campo después de enviar.
         }
@@ -18,37 +18,40 @@ class Post extends Component{
             this.setState({
             likes:this.props.postData.data.likes.length,
             myLike: this.props.postData.data.likes.includes(auth.currentUser.email),  
-        })
+            })
+        }
+        if(this.props.postData.data.comment){
+            this.setState({
+            comment:this.props.postData.data.comment.length,
+            })
         }
         
     }
 
     darLike(){
-        //Agregar mi usuario a un array de usuario que likearon.
-            //Updatear el registro (documento)
         db.collection('posts').doc(this.props.postData.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
         .then(()=>{
             this.setState({
-                likes:this.state.likes + 1,
+                likes:this.props.postData.data.likes.length,
                 myLike: true,
             })
         })
     }
+
     quitarLike(){
-        //Quitar mi usuario a un array de usuario que likearon.
-            //Updatear el registro (documento)
         db.collection('posts').doc(this.props.postData.id).update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
         .then(()=>{
             this.setState({
-                likes:this.state.likes - 1,
+                likes:this.props.postData.data.likes.length,
                 myLike: false,
             })
         })
     }
+
     showModal(){
         this.setState({
             showModal:true,
@@ -84,9 +87,9 @@ class Post extends Component{
         console.log(this.props.postData.data.photo)
         return(
             <View style={styles.contanier}>
-             <Text>Texto del post: {this.props.postData.data.texto}</Text>
-             <Text>user: {this.props.postData.data.owner} </Text>  
-            <Text>Likes: {this.state.likes} </Text> 
+                <Text>Texto del post: {this.props.postData.data.texto}</Text>
+                <Text>user: {this.props.postData.data.owner} </Text>  
+                <Text>Likes: {this.state.likes} </Text> 
             <View style={styles.img}>
              <Image 
                 style={styles.img}
@@ -118,22 +121,37 @@ class Post extends Component{
                         <Text style={styles.closeButton}>X</Text>
                     </TouchableOpacity> 
                     
+                    {this.props.postData.data.comments.length == 0 ?
+                    <Text>No hay comentarios</Text>
+                    :
                     <FlatList 
                         data={this.props.postData.data.comments}
                         keyExtractor={ comment => comment.createdAt.toString()}
                         renderItem= {({item}) => <Text>{item.author}:{item.comment}</Text>}
                     />
+                    
+                    
+                    
+                    }
                     {/* Formulario para nuevo comentarios */}
                     <View>
-                        <TextInput placeholder="Comentar..."
+                        <TextInput style={styles.input}
+                            placeholder="Comentar..."
                             keyboardType="default"
                             multiline
                             onChangeText={text => this.setState({comment: text})}
                             value={this.state.comment}
                         />
-                        <TouchableOpacity onPress={()=>{this.guardarComentario()}}>
-                            <Text>Guadar comentario</Text>
+                        
+                        {this.state.comment.length == 0 ?
+                        <TouchableOpacity disabled={true} onPress={()=>{this.guardarComentario()}} style={styles.buttonDisabled}>
+                            <Text style={styles.textButton}>Guadar comentario</Text>
                         </TouchableOpacity>
+                        :
+                        <TouchableOpacity onPress={()=>{this.guardarComentario()}} style={styles.button}>
+                            <Text style={styles.textButton}>Guadar comentario</Text>
+                        </TouchableOpacity>
+                }
                     </View>
 
                 </Modal>    :
@@ -173,7 +191,40 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         borderRadius: 4,
         paddingHorizontal: 8,
-    }
+    },
+    input:{
+        height:20,
+        paddingVertical: 15,
+        paddingHorizontal: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginVertical: 5,
+    },
+    button:{
+        backgroundColor:'#28a745',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: '#28a745'
+    },
+    textButton:{
+        color: '#fff'
+    },
+    buttonDisabled: {
+        backgroundColor:'gray',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: 'gray',
+    },
 })
 
 export default Post
