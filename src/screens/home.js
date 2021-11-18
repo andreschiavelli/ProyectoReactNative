@@ -9,14 +9,7 @@ class Home extends Component{
     super(props);
     this.state ={
       posteos: [],
-      filterBy:'', 
-      usuariosBuscador:'',
         }
-  }
-  buscarUsuario(){
-   db.collection('posts').where('owner', '==', this.state.usuariosBuscador).orderBy('createdAt').get(
-
-   )
   }
   componentDidMount(){
     db.collection('posts').where('owner', '==', auth.currentUser).orderBy('createdAt').onSnapshot(
