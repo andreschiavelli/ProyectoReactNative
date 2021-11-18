@@ -9,14 +9,15 @@ class Post extends Component{
         this.state = {
            likes: 0,
            myLike: false,
-           showModal: false, //Para la vista del modal
-           comment:'', //para limpiar el campo después de enviar.
+           showModal: false, 
+           comment:'', 
         }
     }
+
     componentDidMount(){
         if(this.props.postData.data.likes){
             this.setState({
-            likes:this.props.postData.data.likes.length,
+            likes: this.props.postData.data.likes.length,
             myLike: this.props.postData.data.likes.includes(auth.currentUser.email),  
             })
         }
@@ -24,8 +25,7 @@ class Post extends Component{
             this.setState({
             comment:this.props.postData.data.comment.length,
             })
-        }
-        
+        } 
     }
 
     darLike(){
@@ -120,19 +120,19 @@ class Post extends Component{
                     <TouchableOpacity onPress={() => this.hideModal()}>
                         <Text style={styles.closeButton}>X</Text>
                     </TouchableOpacity> 
-                    
-                    {this.props.postData.data.comments.length == 0 ?
-                    <Text>No hay comentarios</Text>
-                    :
-                    <FlatList 
-                        data={this.props.postData.data.comments}
-                        keyExtractor={ comment => comment.createdAt.toString()}
-                        renderItem= {({item}) => <Text>{item.author}:{item.comment}</Text>}
-                    />
-                    
-                    
-                    
+
+                    {
+                        this.props.postData.data.comments ?
+                        <FlatList 
+                            data={this.props.postData.data.comments}
+                            keyExtractor={ comment => comment.createdAt.toString()}
+                            renderItem= {({item}) => <Text>{item.author}:{item.comment}</Text>}
+                        />
+                        :
+                        <Text>Aún no hay comentarios. Sé el primero en opinar.</Text>
                     }
+
+
                     {/* Formulario para nuevo comentarios */}
                     <View>
                         <TextInput style={styles.input}

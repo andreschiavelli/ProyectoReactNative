@@ -11,8 +11,9 @@ class Home extends Component{
       posteos: [],
         }
   }
+
   componentDidMount(){
-    db.collection('posts').orderBy('createdAt').onSnapshot(
+    db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
       docs => {
         let posts = [];
         docs.forEach( doc => {
@@ -32,9 +33,6 @@ class Home extends Component{
     return(
    
       <View style={styles.container}>
-           {/* <Text> <form action="Buscar por Nombre" onSubmit={(submit)=>this.evitarSubmit(submit)}> 
-      <input type="text" onChange={(filtrado)=>this.controlarCambios(filtrado)} value={this.state.filterBy} placehoder='ingrese su nombre'/>
-      </form></Text> */}
         <FlatList 
           data= { this.state.posteos }
           keyExtractor = { post => post.id}

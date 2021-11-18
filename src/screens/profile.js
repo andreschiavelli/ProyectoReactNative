@@ -45,13 +45,15 @@ class Profile extends Component{
           <Text style={styles.welcome}> Bienvenido: {this.props.userData.displayName}</Text>
           <Text style={styles.element}> Usuario creado el: {this.props.userData.metadata.creationTime}</Text>
           <Text style={styles.element}> Último login: {this.props.userData.metadata.lastSignInTime}</Text>
-          <Text>Mis posteos:  <FlatList 
+          <Text>Mis posteos: {this.state.posteos.length}</Text>
+          <FlatList 
           data= { this.state.posteos }
-          keyExtractor = { post => post.id}
-          renderItem = { ({item}) => <Post postData={item} eliminarPosteo= {(id)=>this.eliminarPosteo(id)}/>}
-        /> </Text>
-          <TouchableOpacity style={styles.touchable} onPress={()=>this.props.logout()}>
+          keyExtractor = {post => post.id}
+          renderItem = {({item}) => <Post postData={item} eliminarPosteo= {(id)=>this.eliminarPosteo(id)}/>}
+          /> 
+          
 
+          <TouchableOpacity style={styles.touchable} onPress={()=>this.props.logout()}>
             <Text style={styles.touchableText}>Logout</Text>
           </TouchableOpacity>         
       </View>       
