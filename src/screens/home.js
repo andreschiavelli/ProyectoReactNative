@@ -12,7 +12,7 @@ class Home extends Component{
         }
   }
   componentDidMount(){
-    db.collection('posts').where('owner', '==', auth.currentUser).orderBy('createdAt').onSnapshot(
+    db.collection('posts').where('owner', '==', auth.currentUser.email).orderBy('createdAt').onSnapshot(
       docs => {
         let posts = [];
         docs.forEach( doc => {
