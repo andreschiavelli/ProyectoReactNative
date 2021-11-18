@@ -11,7 +11,7 @@ class Profile extends Component{
     }
   }
   componentDidMount(){
-    db.collection('postsForm').where('owner', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
+    db.collection('posts').where('owner', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
       docs => {
         let posts = [];
         docs.forEach( doc => {
@@ -29,7 +29,7 @@ class Profile extends Component{
   }
         
   eliminarPosteo(id){
-    db.collection('postsForm').doc(id).delete()
+    db.collection('posts').doc(id).delete()
     .then((res)=>{
       this.setState({
         posts:posteos,

@@ -9,7 +9,6 @@ class Home extends Component{
     super(props);
     this.state ={
       posteos: [],
-      filterBy:'', 
       usuariosBuscador:'',
         }
   }
@@ -39,9 +38,6 @@ class Home extends Component{
     return(
    
       <View style={styles.container}>
-           {/* <Text> <form action="Buscar por Nombre" onSubmit={(submit)=>this.evitarSubmit(submit)}> 
-      <input type="text" onChange={(filtrado)=>this.controlarCambios(filtrado)} value={this.state.filterBy} placehoder='ingrese su nombre'/>
-      </form></Text> */}
         <FlatList 
           data= { this.state.posteos }
           keyExtractor = { post => post.id}
