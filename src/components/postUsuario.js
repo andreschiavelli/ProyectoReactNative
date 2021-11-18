@@ -31,7 +31,7 @@ class Post extends Component{
         })
         .then(()=>{
             this.setState({
-                likes:this.state.likes + 1,
+                likes:this.props.postData.data.likes.length,
                 myLike: true,
             })
         })
@@ -44,7 +44,7 @@ class Post extends Component{
         })
         .then(()=>{
             this.setState({
-                likes:this.state.likes - 1,
+                likes:this.props.postData.data.likes.length,
                 myLike: false,
             })
         })
