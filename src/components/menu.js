@@ -87,9 +87,9 @@ class Menu extends Component{
                 </Drawer.Navigator> :
                 <Drawer.Navigator>
                     <Drawer.Screen name="Home" component={()=><Home />} />
-                    <Drawer.Screen name="buscadorUsuarios" component={()=><BuscadorUsuarios />} />
                     <Drawer.Screen name ="New Post" component={(drawerProps)=><PostForm drawerProps={drawerProps}/>}/>
                     <Drawer.Screen name="Perfil" component={()=><Perfil userData={this.state.user} logout={()=>this.logout() } />} />
+                    <Drawer.Screen name="buscadorUsuarios" component={()=><BuscadorUsuarios />} />
                 </Drawer.Navigator>
             }
             </NavigationContainer>
