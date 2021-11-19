@@ -45,7 +45,7 @@ class buscadorUsuarios extends Component {
     keyboardType="default"
     onChangeText={text => this.setState({ usuariosBuscador: text }) }
      />
-    <TouchableOpacity onPress= {()=>this.buscarUsuario()}>buscadorUsuarios</TouchableOpacity>
+    <TouchableOpacity onPress= {()=>this.buscarUsuario()} style={styles.botonBuscadorUsuario}></TouchableOpacity>
     <FlatList 
           data= { this.state.posteos }
           keyExtractor = { post => post.id}
@@ -80,7 +80,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#ccc',
         borderRadius: 4,
         marginVertical: 10,
-    }
+    },
+    botonBuscadorUsuario:{
+        backgroundColor:'#28a745',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: '#28a745',
+        
+    },
 })
 
 export default buscadorUsuarios;

@@ -24,6 +24,7 @@ class Post extends Component{
         if(this.props.postData.data.comment){
             this.setState({
             comment:this.props.postData.data.comment.length,
+            myComment: this.props.postData.data.comment.includes(auth.currentUser.email),  
             })
         } 
     }
@@ -70,6 +71,7 @@ class Post extends Component{
             createdAt: Date.now(),
             author: auth.currentUser.email,
             comment: this.state.comment, 
+            comments:this.props.postData.data.comment.length,
         }
         //identifacar el documento que queremos modificar.
          db.collection('posts').doc(this.props.postData.id).update({
