@@ -11,7 +11,7 @@ class buscadorUsuarios extends Component {
         this.state = {
             posteos: [],
             usuariosBuscador: '',
-            // searched: false,
+            blanco: '',
         }
     }
     buscarUsuario() {
@@ -38,19 +38,29 @@ class buscadorUsuarios extends Component {
 
     render() {
         return (
-
     <View style={styles.container}>
-    <TextInput style={styles.input}
-    placeholder="Buscar"
+        <TextInput style={styles.input}
+    placeholder="Buscar usuario..."
     keyboardType="default"
     onChangeText={text => this.setState({ usuariosBuscador: text }) }
      />
-    <TouchableOpacity onPress= {()=>this.buscarUsuario()} style={styles.botonBuscadorUsuario}></TouchableOpacity>
-    <FlatList 
-          data= { this.state.posteos }
-          keyExtractor = { post => post.id}
-          renderItem = { ({item}) => <Post postData={item} />}
-        />
+    <TouchableOpacity onPress= {()=>this.buscarUsuario()} style={styles.botonBuscadorUsuario}>
+        <Text style={styles.textButton}>Buscar</Text>
+    </TouchableOpacity>
+        { this.state.usuariosBuscador ?
+          <FlatList 
+            data= { this.state.posteos }
+            keyExtractor = { post => post.id}
+            renderItem = { ({item}) => <Post postData={item} 
+            value= { this.state.blanco }
+            />}
+        />  
+
+            :
+            <View style={styles.Foto}>
+            <Image source={require('../../assets/search.svg')} style={styles.foto}/>   
+            </View>
+            }
      </View>
         )
     }
@@ -59,27 +69,8 @@ class buscadorUsuarios extends Component {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
-    },
-    formContainer: {
-        backgroundColor: '#ccc',
-        marginHorizontal: 10,
-        padding: 10,
-    },
-    field: {
-        borderColor: '#444',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        height: 20,
-        paddingHorizontal: 20,
-        paddingVertical: 10
-    },
-    image: {
-        height: 250,
-    },
-    touchable: {
-        backgroundColor: '#ccc',
-        borderRadius: 4,
-        marginVertical: 10,
+        backgroundColor: '#A2DBFA',
+        paddingBottom: '60%',
     },
     botonBuscadorUsuario:{
         backgroundColor:'#28a745',
@@ -89,8 +80,35 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745',
-        
+        borderColor: '#28a745',  
+        width: '40%',
+        marginLeft: '30%',
+    },
+    textButton:{
+        color: '#fff'
+    },
+    input:{
+        height:20,
+        paddingVertical:15,
+        paddingHorizontal: 10,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginTop: '30px',
+        marginBottom: '15px',
+        width: '80%',
+        marginLeft: '10%',
+        backgroundColor: 'white',
+    },
+    foto: {
+        width: '300px',
+        height: '300px',
+        marginTop: '10px',
+    },
+    Foto: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 })
 

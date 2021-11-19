@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 class Login extends Component{
     constructor(props){
@@ -13,8 +13,11 @@ class Login extends Component{
 
     render(){
         return(
-            <View style={styles.formContainer}>
-                <Text>Login</Text>
+            <View style={styles.todo}>
+            <View style={styles.container}>
+                 <View style={styles.Foto}>
+                    <Image source={require('../../assets/login.svg')} style={styles.foto}/>   
+                </View>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
@@ -40,14 +43,20 @@ class Login extends Component{
                 }
                 
             </View>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    formContainer:{
+    todo:{
+        backgroundColor: '#E8F0F2',
+    },
+    container:{
         paddingHorizontal:10,
         marginTop: 20,
+        backgroundColor: '#E8F0F2',
+        paddingBottom: '15%',
     },
     input:{
         height:20,
@@ -58,6 +67,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical:10,
+        backgroundColor: 'white',
     },
     button:{
         backgroundColor:'#28a745',
@@ -67,7 +77,9 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#28a745',
+        width: '40%',
+        marginLeft: '30%',
     },
     textButton:{
         color: '#fff'
@@ -84,6 +96,16 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderStyle: 'solid',
         borderColor: 'gray',
+        width: '40%',
+        marginLeft: '30%',
+    },
+    foto: {
+        width: '300px',
+        height: '300px',
+    },
+    Foto: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
 })

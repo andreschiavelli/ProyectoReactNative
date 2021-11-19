@@ -96,7 +96,8 @@ class Post extends Component{
             </View> 
             
             <View style={styles.nombre}>
-                <Text style={styles.user}>{this.props.postData.data.owner}: </Text> <Text>{this.props.postData.data.texto}</Text>
+                <Text style={styles.user}>{this.props.postData.data.owner}</Text>
+                <Text>{this.props.postData.data.texto}</Text>
             </View> 
             <Image style={styles.line} source={{uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAAMUlEQVRIie3NoQEAIAwEsYe52B7k71RUbWVBXBaIBADAb4btLWk1v2c2hykevQAAFC6/1AUqX0goLAAAAABJRU5ErkJggg=="}}></Image>
             <View style={styles.iconos}>
@@ -185,6 +186,7 @@ const styles = StyleSheet.create({
     
     todo:{
         flexDirection: 'row',
+        backgroundColor: '#E8F0F2',
     },
     contanier:{
         marginBottom: 20,
@@ -194,6 +196,7 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '60%',
         marginLeft: '20%',
+        backgroundColor: '#E8F0F2',
     },
     img:{
         height:100 
@@ -201,19 +204,21 @@ const styles = StyleSheet.create({
     modalContainer:{
         width: '97%',
         borderRadius: 4,
+        borderWidth: 2,
         padding: 5,
         alignSelf: 'centre',
         boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
         marginTop: 20, 
         marginBottom: 10,
+        borderColor: '#053742',
     },
     closeButton:{
-        color: '#fff',
-        backgroundColor: '#dc3545',
         padding: 5,
         alignSelf: 'flex-end',
         borderRadius: 4,
         paddingHorizontal: 8,
+        width: '30px',
+        height: '30px',
     },
     input:{
         height:20,
@@ -226,14 +231,14 @@ const styles = StyleSheet.create({
         marginVertical: 5,
     },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor: '#053742',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#053742',
     },
     textButton:{
         color: '#fff'
@@ -252,7 +257,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         width: "100%",
         justifyContent: "space-around",
-        margin: 7,
     },
     icons:{
         width: '23px',
@@ -266,7 +270,6 @@ const styles = StyleSheet.create({
     },
     nombre:{
         textAlign: 'left',
-        flexDirection: 'row', 
         marginTop: '8px',
         marginBottom: '8px',
     },
@@ -299,9 +302,6 @@ const styles = StyleSheet.create({
     opinar:{
         color: 'grey', 
         fontStyle: 'italic',
-    },
-    negro:{
-        color: 'red',
     },
     com:{
         flexDirection: 'row', 

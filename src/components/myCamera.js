@@ -109,7 +109,6 @@ class MyCamera extends Component {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-    
     },
     cameraBody:{
         flex: 1,

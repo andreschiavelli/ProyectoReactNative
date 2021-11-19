@@ -71,7 +71,6 @@ class Post extends Component{
             createdAt: Date.now(),
             author: auth.currentUser.email,
             comment: this.state.comment, 
-            comments:this.props.postData.data.comment.length,
         }
         //identifacar el documento que queremos modificar.
          db.collection('posts').doc(this.props.postData.id).update({
@@ -100,7 +99,8 @@ class Post extends Component{
             </View> 
             
             <View style={styles.nombre}>
-                <Text style={styles.user}>{this.props.postData.data.owner}: </Text> <Text>{this.props.postData.data.texto}</Text>
+                <Text style={styles.user}>{this.props.postData.data.owner}</Text> 
+                <Text>{this.props.postData.data.texto}</Text>
             </View> 
             <Image style={styles.line} source={{uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAAMUlEQVRIie3NoQEAIAwEsYe52B7k71RUbWVBXBaIBADAb4btLWk1v2c2hykevQAAFC6/1AUqX0goLAAAAABJRU5ErkJggg=="}}></Image>
             <View style={styles.iconos}>
@@ -181,19 +181,20 @@ class Post extends Component{
 
 const styles = StyleSheet.create({
     todo:{
-        backgroundColor: 'grey',
+        backgroundColor: '#A2DBFA',
     },
     contanier:{
         marginTop: '10px',
         marginBottom: '10px',
         marginLeft: '15%',
         borderColor: "#f0f0f0",
+        borderRadius: 6,
         borderWidth: 2,
         padding: 10,
         width: '70%',
         alignItems: 'centre',
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#E8F0F2',
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.2,
@@ -213,12 +214,14 @@ const styles = StyleSheet.create({
     modalContainer:{
         width: '90%',
         borderRadius: 4,
+        borderWidth: 2,
         marginLeft: '5%',
         padding: 5,
         alignSelf: 'centre',
         boxShadow: 'rgb(23 23 23 / 20%) 0px 10px 10px',
         marginTop: 20, 
         marginBottom: 10,
+        borderColor: '#053742',
     },
     closeButton:{
         padding: 5,
@@ -239,14 +242,14 @@ const styles = StyleSheet.create({
         marginVertical: 5,
     },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor: '#053742',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#053742',
     },
     textButton:{
         color: '#fff'
@@ -265,7 +268,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         width: "100%",
         justifyContent: "space-around",
-        margin: 7,
     },
     icons:{
         width: '23px',
@@ -273,7 +275,6 @@ const styles = StyleSheet.create({
     },
     nombre:{
         textAlign: 'left',
-        flexDirection: 'row', 
         marginTop: '8px',
         marginBottom: '8px',
     },
@@ -306,9 +307,6 @@ const styles = StyleSheet.create({
     opinar:{
         color: 'grey', 
         fontStyle: 'italic',
-    },
-    negro:{
-        color: 'red',
     },
     com:{
         flexDirection: 'row', 

@@ -54,7 +54,7 @@ class PostForm extends Component {
             onChangeText={ text => this.setState({textoPost:text}) }/>
  
             <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
-                    <Text>¡Publicar Foto!</Text>    
+                    <Text style={styles.textButton}>¡Publicar Foto!</Text>    
             </TouchableOpacity>
         </View>
         }
@@ -65,6 +65,7 @@ class PostForm extends Component {
 const styles = StyleSheet.create({
     wrap:{
         flex: 1,
+        backgroundColor: '#E8F0F2',
     },
     field:{
         Altura: 400,
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
         marginTop: '50px',
     },
     button:{
-        backgroundColor: '#28a745',
+        backgroundColor: '#053742',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
@@ -90,8 +91,11 @@ const styles = StyleSheet.create({
         marginLeft: '35%',
         marginTop: '20px',
         borderStyle: 'solid',
-        borderColor: '#28a745',
-    }
+        borderColor: '#053742',
+    },
+    textButton:{
+        color: '#fff'
+    },
 })
 
 export default PostForm;
