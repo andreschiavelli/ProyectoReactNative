@@ -11,7 +11,6 @@ class buscadorUsuarios extends Component {
         this.state = {
             posteos: [],
             usuariosBuscador: '',
-            blanco: '',
         }
     }
     buscarUsuario() {
@@ -26,7 +25,6 @@ class buscadorUsuarios extends Component {
                     })
                     this.setState({
                         posteos: posts,
-                        // searched: true
                     })
                 })
             }
@@ -42,25 +40,38 @@ class buscadorUsuarios extends Component {
         <TextInput style={styles.input}
     placeholder="Buscar usuario..."
     keyboardType="default"
+    value={this.state.usuariosBuscador}
     onChangeText={text => this.setState({ usuariosBuscador: text }) }
      />
     <TouchableOpacity onPress= {()=>this.buscarUsuario()} style={styles.botonBuscadorUsuario}>
         <Text style={styles.textButton}>Buscar</Text>
     </TouchableOpacity>
         { this.state.usuariosBuscador ?
-          <FlatList 
+        <View>
+    
+            { this.state.posteos.length == 0 ?
+            <View>
+            <Text style={styles.noUser}>El usuario no existe o aún no tiene publicaciones. Inténtalo denuevo!</Text>
+            <View style={styles.Foto}>
+            <Image source={require('../../assets/error.svg')} style={styles.error}/>   
+            </View></View>
+            :
+            <FlatList 
             data= { this.state.posteos }
-            keyExtractor = { post => post.id}
+            keyExtractor = { post => post.id.toString()}
             renderItem = { ({item}) => <Post postData={item} 
-            value= { this.state.blanco }
-            />}
-        />  
+            value= { this.state.usuariosBuscador }
+            />}/>
+            }
 
+
+            </View>
             :
             <View style={styles.Foto}>
             <Image source={require('../../assets/search.svg')} style={styles.foto}/>   
             </View>
             }
+            
      </View>
         )
     }
@@ -110,6 +121,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    error: {
+        width: '300px',
+        height: '300px',
+    },
+    noUser: {
+        color: 'grey', 
+        fontStyle: 'italic',
+        width: '80%',
+        marginLeft: '10%',
+        marginTop: '50px',
+    }
 })
 
 export default buscadorUsuarios;

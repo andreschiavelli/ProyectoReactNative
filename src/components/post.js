@@ -140,7 +140,10 @@ class Post extends Component{
                         <FlatList
                             data={this.props.postData.data.comments}
                             keyExtractor={ comment => comment.createdAt.toString()}
-                            renderItem= {({item}) => <View style={styles.com}><Text style={styles.user}>{item.author}: </Text><Text>{item.comment}</Text></View>}
+                            renderItem= {({item}) => <View style={styles.texto}>
+                                <Text style={styles.user}>{item.author}: </Text>
+                                <Text>{item.comment}</Text>
+                                </View>}
                         />
                         :
                         <Text style={styles.opinar}>Aún no hay comentarios. Sé el primero en opinar.</Text>
@@ -287,6 +290,12 @@ const styles = StyleSheet.create({
     },
     user:{
         fontWeight: 'bold',
+    },    
+    texto:{
+        flexDirection: 'row', 
+        width: "100%",
+        justifyContent: 'left',
+        
     },
     numero:{
         fontWeight: 'bold',
@@ -307,12 +316,6 @@ const styles = StyleSheet.create({
     opinar:{
         color: 'grey', 
         fontStyle: 'italic',
-    },
-    com:{
-        flexDirection: 'row', 
-        width: "100%",
-        justifyContent: 'left',
-        
     },
 })
 
