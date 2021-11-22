@@ -31,6 +31,7 @@ class buscadorUsuarios extends Component {
 
 
         )
+        
 
     }
 
@@ -60,7 +61,6 @@ class buscadorUsuarios extends Component {
             data= { this.state.posteos }
             keyExtractor = { post => post.id.toString()}
             renderItem = { ({item}) => <Post postData={item} 
-            value= { this.state.usuariosBuscador }
             />}/>
             }
 

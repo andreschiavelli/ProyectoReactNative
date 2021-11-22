@@ -10,7 +10,7 @@ class Post extends Component{
            likes: 0,
            myLike: false,
            showModal: false, 
-           comment:'', 
+           comment: '', 
         }
     }
 
@@ -27,6 +27,7 @@ class Post extends Component{
             myComment: this.props.postData.data.comment.includes(auth.currentUser.email),  
             })
         } 
+       
     }
 
     darLike(){
@@ -102,6 +103,12 @@ class Post extends Component{
                 <Text style={styles.user}>{this.props.postData.data.owner}</Text> 
                 <Text>{this.props.postData.data.texto}</Text>
             </View> 
+
+            {this.props.postData.data.comments ?
+                <Text style={styles.comentario}>Ver los {this.props.postData.data.comments.length} comentarios.</Text>
+                        :
+                <Text style={styles.comentario}>Sin comentarios.</Text>    
+            }
             <Image style={styles.line} source={{uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAAMUlEQVRIie3NoQEAIAwEsYe52B7k71RUbWVBXBaIBADAb4btLWk1v2c2hykevQAAFC6/1AUqX0goLAAAAABJRU5ErkJggg=="}}></Image>
             <View style={styles.iconos}>
                 {/* Cambio de botones me gusta/ me dejó de gustar */}
@@ -137,14 +144,17 @@ class Post extends Component{
 
                     {
                         this.props.postData.data.comments ?
+                        <View>
                         <FlatList
                             data={this.props.postData.data.comments}
                             keyExtractor={ comment => comment.createdAt.toString()}
                             renderItem= {({item}) => <View style={styles.texto}>
                                 <Text style={styles.user}>{item.author}: </Text>
-                                <Text>{item.comment}</Text>
+                                <Text >{item.comment}</Text>
                                 </View>}
+                                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                         />
+                        </View>
                         :
                         <Text style={styles.opinar}>Aún no hay comentarios. Sé el primero en opinar.</Text>
                     }
@@ -174,6 +184,7 @@ class Post extends Component{
                 </Modal>    :
                 <Text></Text>
             }
+            
             </View>   
         </View> 
         )
@@ -293,9 +304,7 @@ const styles = StyleSheet.create({
     },    
     texto:{
         flexDirection: 'row', 
-        width: "100%",
         justifyContent: 'left',
-        
     },
     numero:{
         fontWeight: 'bold',
@@ -316,6 +325,11 @@ const styles = StyleSheet.create({
     opinar:{
         color: 'grey', 
         fontStyle: 'italic',
+    },
+    comentario:{
+        color: 'grey', 
+        fontStyle: 'italic',
+        textAlign: 'center'
     },
 })
 
