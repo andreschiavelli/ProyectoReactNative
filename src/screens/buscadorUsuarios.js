@@ -9,7 +9,7 @@ class buscadorUsuarios extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posteos: [],
+            posteos: null,
             usuariosBuscador: '',
         }
     }
@@ -23,16 +23,14 @@ class buscadorUsuarios extends Component {
                         id: doc.id,
                         data: doc.data(),
                     })
-                    this.setState({
+                    
+                }) 
+              this.setState({
                         posteos: posts,
+                        usuariosBuscador: '',
                     })
-                })
-            }
-
-
+            } 
         )
-        
-
     }
 
     render() {
@@ -47,7 +45,7 @@ class buscadorUsuarios extends Component {
     <TouchableOpacity onPress= {()=>this.buscarUsuario()} style={styles.botonBuscadorUsuario}>
         <Text style={styles.textButton}>Buscar</Text>
     </TouchableOpacity>
-        { this.state.usuariosBuscador ?
+        { this.state.posteos ?
         <View>
     
             { this.state.posteos.length == 0 ?

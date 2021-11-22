@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput} from 'react-native';
 import { db, auth } from '../firebase/config';
-import Post from '../components/postUsuario';
+import PostUsuario from '../components/postUsuario';
 import { color } from 'react-native-reanimated';
 
 class Profile extends Component{
@@ -77,7 +77,7 @@ class Profile extends Component{
           <FlatList 
           data= { this.state.posteos }
           keyExtractor = {post => post.id}
-          renderItem = {({item}) => <Post postData={item} eliminarPosteo= {(id)=>this.eliminarPosteo(id)}/>}
+          renderItem = {({item}) => <PostUsuario postData={item} eliminarPosteo= {(id)=>this.eliminarPosteo(id)}/>}
           /> 
           
 

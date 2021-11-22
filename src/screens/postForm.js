@@ -46,7 +46,8 @@ class PostForm extends Component {
             <MyCamera onImageUpload={(url) => {this.onImageUpload(url)}}/> :
         
         <View>
-            <TextInput style={styles.field} 
+            <Text style={styles.descripcion}>Agrega una descripción:</Text>
+            <TextInput style={styles.input} 
             keyboardType='default'
             placeholder='Escriba aqui'
             multiline
@@ -54,7 +55,7 @@ class PostForm extends Component {
             onChangeText={ text => this.setState({textoPost:text}) }/>
  
             <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
-                    <Text style={styles.textButton}>¡Publicar Foto!</Text>    
+                    <Text style={styles.textButton}>Todo listo, ¡Publicar Foto!</Text>    
             </TouchableOpacity>
         </View>
         }
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#E8F0F2',
     },
-    field:{
+    input:{
         Altura: 400,
         paddingVertical: 15,
         paddingHorizontal: 10,
@@ -78,7 +79,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         width: '80%',
         marginLeft: '10%',
-        marginTop: '50px',
+        marginTop: '20px',
+        backgroundColor: 'white',
     },
     button:{
         backgroundColor: '#053742',
@@ -95,6 +97,13 @@ const styles = StyleSheet.create({
     },
     textButton:{
         color: '#fff'
+    },
+    descripcion:{
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginTop: '50px',
+        marginLeft: '10%',
+        textAlign: 'left',
     },
 })
 

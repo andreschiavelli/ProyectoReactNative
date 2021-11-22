@@ -3,7 +3,7 @@ import {Text, View, StyleSheet, TouchableOpacity, Modal, TextInput, Image, FlatL
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 
-class Post extends Component{
+class PostUsuario extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -310,4 +310,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Post
+export default PostUsuario;
