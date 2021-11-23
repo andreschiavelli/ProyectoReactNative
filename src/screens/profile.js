@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor: '#E8F0F2',
         paddingTop: '20px',
-        paddingBottom: '30%',
     },
     welcome:{
         fontSize: 18,
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
       borderRadius: 4,
       width: '40%',
       marginLeft: '30%',
-      marginBottom: '20px',
+      marginBottom: '100%',
     },
     touchableText:{
       fontWeight: 'bold',

@@ -15,6 +15,7 @@ class Login extends Component{
         return(
             <View style={styles.todo}>
             <View style={styles.container}>
+            <Text style={styles.login}>Iniciar sesión</Text>
                  <View style={styles.Foto}>
                     <Image source={require('../../assets/login.svg')} style={styles.foto}/>   
                 </View>
@@ -107,7 +108,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
+    login:{
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginTop: '5px',
+        textAlign: 'center',
+    },
 })
 
 export default Login;

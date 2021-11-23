@@ -16,6 +16,7 @@ class Register extends Component{
         return(
             <View style={styles.todo}>
             <View style={styles.container}>
+            <Text style={styles.register}>Crea tu cuenta</Text>
                  <View style={styles.Foto}>
                     <Image source={require('../../assets/register.svg')} style={styles.foto}/>   
                 </View>
@@ -113,6 +114,12 @@ const styles = StyleSheet.create({
     Foto: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    register:{
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginTop: '5px',
+        textAlign: 'center',
     },
 })
 
