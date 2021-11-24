@@ -10,6 +10,7 @@ class PostUsuario extends Component{
            likes: 0,
            myLike:false,
            showModal: false, 
+           showAlert: false, 
            comment:'', 
         }
     }
@@ -58,6 +59,18 @@ class PostUsuario extends Component{
     hideModal(){
         this.setState({
             showModal:false,
+        })
+    }
+
+    showAlert(){
+        this.setState({
+            showAlert:true,
+        })
+    }
+
+    hideAlert(){
+        this.setState({
+            showAlert:false,
         })
     }
 
@@ -113,16 +126,39 @@ class PostUsuario extends Component{
                         <Text style={styles.numero}>{this.state.likes}  </Text>
                         <Image style={styles.icons} source={{uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACnElEQVRoge2ZS2tTQRiGn5NaarWIi3qroFgVLxtb3HvBjYIuvBREFyKu/QUqBeuuiCIIdaHg1rULbxtXLlwrXjDgQq2a4ibGltS8LuacOInNZcaTTAJ54YM5J8M3z5uZnDPzBXrqqaeeQipy6SzIAGuB9cAwkAeyEXzzGVwm1ygwBOSAWeBrBPLJV2+gg4I7gi8CLRHvBFOCXU3k2h33fV8j12fBjOBAGuDjgmc1BloqSoK7MrNTnWs4/qzkkO+JYMwX/oJgwWEwO3KCI1auQ4I5z1zzgvOu8JOeg9lRFEwIDgsKKeS70iz8WcdprhcL8TeYRq6S4HQj+C2CXykN2IooCDbbzJkqD9eA5S7Lrc0aBKbsG+X3gGAb8JZ/TXWaSsD2CLJQCXuCzocHw3jcvkh0tP0s3jqWNGwDOwKA+KrMGgEI+oF5umMJgfkdDESwmACvoHvgwbCuhL8z0AcshiRylIBlEZQyABH8BubCMjkpF5llVLFsXgeC8dGrpGEbeBkAxFdlVtvA4wAgvnqUNOytRD/wEdgQgshBs8CmCIpgzUB8434oKgfdS+Ch6lAvWIPZJA21m6pJ5YGtdhGh4uUVwXfgZrupHDTdsAIiGFTtikHIeCMYaMqmYEzwswOg7ZPYXqe5kjkbhwZP4pwTvGXiegfAT3vBxwYiwa2A8DP6311ybOJGAPjbcqzdNjJyVenVi+pFSTCZGniViQlBvoXwecGplsBbJsYF2RbAfxDsaSm8ZWKVTLk9LfgHgtVtga8yclKmEu0L/kNwpu3gVSbWCR56wD8VbAwKn0jmUXtRzZXRC3Hf9B6RaUkwKnheB/6FYGdozroS9Akuy/zBkYAXBZdkyjfdIcF+wac49oXm8ZJgRDASmqOnVuoPOvCVPRaKmOwAAAAASUVORK5CYII="}}></Image>
                     </TouchableOpacity>                       
-                }
-                <TouchableOpacity onPress={()=>{this.props.eliminarPosteo(this.props.postData.id)}}>
+             }
+                <TouchableOpacity onPress={()=>this.showAlert()}>
                     <Image style={styles.trash} source={{uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAAZUlEQVRIie2WQQqAMAwEp75O313Qf1j/sd6lpahBLOxATiU7aXMpmL8i2AS61BoVnivhTyvXHFPIpN17GEitAwU9UWo4vthxFYsttthiiy0eS3wE5JfbHYJFUF588nbBHDC8GZQTR0laA9zX7ucAAAAASUVORK5CYII="}}></Image>
                 </TouchableOpacity>
+            
+                
                 {/* Ver modal */}
                 <TouchableOpacity onPress={()=>this.showModal()}>
                     <Image style={styles.icons} source={{uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAEWElEQVRoge2aTUxcVRiG3+/cYaoLrakxpmnwp8y0YGsXDNjgjKYx/ja6cMHKhQtbGEpt4tImjX+VJpqYaooUNNGVC41pbWJJWBhsShG4FBOERmYEbU1LF9A0bSIMM+d1ATOdgZnLvXf+aMKz+u653zn3fTnnzr3nuwDrrLOOFVKQUUgJdE3uFJ14WiB1FFRBsFWI+wnct3ShWxpyU8ApAlElYlLjghmuGoMI85WQl5FAZ6RWaXmTwtcBVLoc5jIhp5TS3w41bfvdrRZXRmo7Jl5VIocBNLi9cA76ANVmhqvOOu3oyEjtl5O7lIq3AxJyeiGHnAOl1Wzx/WG3gy0jjd/TmJqJHoHgMIAK1/KcESP40fC0vw3vi14teVUjDV+PbYrHvd8ReKkw+hxCdM/T+8bogUdvWKVZGtn91eTDCR3vAWVXYdU5g8C4Xki8MPJ29dVcOTmNPHXi0oPaU9EHcHtx5DlEcKnCiIX69+2YzXZaZWv0fRHZQE/FqTVjAgCImoW498dAp5n1Hs1qZKOXRwk+U1xlrtgDbvwg24kVS6uuIxqE8BxymFwDJLRG6OIB/2/pjZliSYHw0xXtawtDKRwHmTEJGYLrOqKvofBP62KwO9AV2ZvekPmXVzxUUjl5IJSDGcfJoKHjzy0Loq6gUG/ExUdLwrNlqPXxaSBtRuIw9uLuMQEAiiqeWl5pS0sHy6EmLxSCd8JUJDvLIiYfNJ9MhneM0MnGiGcNA5WGgUoQ3aXLW4bII6kwGdSdjMwB2GCnv2GgcmC//18AqG+PVtLg5VLkZWHODPvvBTJ/fvPeN5eTtBmJXgW42VYvolu0NAMADXYBeLkkeSuZNsP+zQDgSRvtGgB7RgSv2Jr+Qucth7ySDNOX1ojjgcqNktFUmAyEMlAeNXmg0ZcMU0aUR50BkCiLIHdow2P8nDxIGRnYv/U6wN7yaHJFz6LmRZbtO4zPSq3GLRSeSD/OfEkkpb4rOkQiUFJVzuk3m33B9Jpx5oyIUIOtWNv3SoLCd5YXvldsaYebtw0A+LxkshxC4JMljRlk3Zv/tyn2LoC1eOP3Qm6+l+3EKgU6z3kA1UWT5QAC4zHtDeUqneaslgwerJmp8MSCAAaLps4mBMYhC89b1X8tyz79+3bMUtSLEJwpvDybEN0x7Q0NNz9xzSrN3h6dlPrOyCFCjhdEnD1ioHxoXq86Zuezgr1CnAgNJn7KW5pdiF9BCZgtvo/tmAAyXuOticPznHtlduF5KNVmNvnsb3eXsG0Egkang9sc9x9STpfkY2ht+0SNMmRslfx5CI6BeAhgNSCPAXgAi5+nlQC3CNwQ4G8N/AXBoBL0DzX5x9yKT8fWjChDHQFoZWJWUxovhn2/FEKUG1adkfqTE88S0muR22MYeCtZBSkXlkb2fDN1z+35+AiyP91HhTg6FPb9UIj/XMgXy6V1OxZvw6KJOQIzQkQpuCDUp82W7YtP/JYSqFznLuR/mRuPVCpiEN8AAAAASUVORK5CYII="}}></Image>
                 </TouchableOpacity>
                 
-            </View>
+                </View> 
+                {this.state.showAlert ?
+                
+                <Modal style={styles.modalContainer2}
+                visible= {this.state.showAlert}
+                animationType= 'slide'
+                transparent= {false}>
+
+                <Text style={styles.eliminar1}>¿Seguro quieres eliminar la publcación?</Text>
+                <View style={styles.eliminar}> 
+                <TouchableOpacity style={styles.buttonR} onPress={() => this.hideAlert()}>
+                    <Text>Cancelar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonA} onPress={()=>{this.props.eliminarPosteo(this.props.postData.id)}}>
+                    <Text>Sí, eliminar</Text>                
+                    </TouchableOpacity>
+                </View> 
+                </Modal> 
+                
+                :
+                <Text></Text>
+                }
             
             {/* Modal para comentarios */}
             {   this.state.showModal ?
@@ -168,7 +204,7 @@ class PostUsuario extends Component{
                 }
                     </View>
 
-                </Modal>    :
+                </Modal>  :
                 <Text></Text>
 
             }
@@ -203,6 +239,18 @@ const styles = StyleSheet.create({
     },
     modalContainer:{
         width: '97%',
+        borderRadius: 4,
+        borderWidth: 2,
+        padding: 5,
+        alignSelf: 'centre',
+        boxShadow: 'rgb(204 204 204) 0px 0px 9px 7px',
+        marginTop: 20, 
+        marginBottom: 10,
+        borderColor: '#053742',
+    },
+    modalContainer2:{
+        width: '90%',
+        marginLeft: '5%',
         borderRadius: 4,
         borderWidth: 2,
         padding: 5,
@@ -255,8 +303,9 @@ const styles = StyleSheet.create({
     },
     iconos:{
         flexDirection: 'row', 
-        width: "100%",
+        width: "90%",
         justifyContent: "space-around",
+        marginLeft: '3%',
     },
     icons:{
         width: '23px',
@@ -267,6 +316,7 @@ const styles = StyleSheet.create({
         height: '23px',
         textAlign: 'center',
         alignSelf: 'center',
+
     },
     nombre:{
         textAlign: 'left',
@@ -307,6 +357,37 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         width: "100%",
         justifyContent: 'left',
+    },
+    eliminar1:{
+        textAlign: 'center',
+    },
+    eliminar:{
+        flexDirection: 'row', 
+        width: "80%",
+        marginTop: '10px',
+        justifyContent: 'space-around',
+        marginLeft: '10%',
+
+    },
+    buttonA:{
+        backgroundColor:'#28a745',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: '#28a745'
+    },
+    buttonR:{
+        backgroundColor: 'gray',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: 'gray',
     },
 })
 

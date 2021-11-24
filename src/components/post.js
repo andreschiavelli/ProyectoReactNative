@@ -152,7 +152,6 @@ class Post extends Component{
                                 <Text style={styles.user}>{item.author}: </Text>
                                 <Text >{item.comment}</Text>
                                 </View>}
-                                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                         />
                         </View>
                         :

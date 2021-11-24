@@ -42,8 +42,8 @@ class PostForm extends Component {
         return (
         <View style={styles.wrap}>
         {
-            this.state.showCamera ? //hacemos un if ternario para que pregunte que si el showCamara es verdadero muestre la camara.
-            <MyCamera onImageUpload={(url) => {this.onImageUpload(url)}}/> : //usamos MyCamera para que sea renderizada
+            this.state.showCamera ? //hacemos un if ternario para que pregunte que si ya cagó la foto, que muestre el formulario.
+            <MyCamera onImageUpload={(url) => {this.onImageUpload(url)}}/> : //usamos MyCamera para que sea renderizada y le pasamos la función de cargar la foto
         
         <View>
             <Text style={styles.descripcion}>Agrega una descripción:</Text>
