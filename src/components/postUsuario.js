@@ -17,7 +17,7 @@ class PostUsuario extends Component{
     componentDidMount(){
         if(this.props.postData.data.likes){
             this.setState({
-            likes:this.props.postData.data.likes.length,
+            likes: this.props.postData.data.likes.length,
             myLike: this.props.postData.data.likes.includes(auth.currentUser.email),  
         })
         }
@@ -25,21 +25,17 @@ class PostUsuario extends Component{
     }
 
     darLike(){
-        //Agregar mi usuario a un array de usuario que likearon.
-            //Updatear el registro (documento)
         db.collection('posts').doc(this.props.postData.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
         .then(()=>{
             this.setState({
-                likes:this.props.postData.data.likes.length,
+                likes: this.props.postData.data.likes.length,
                 myLike: true,
             })
         })
     }
     quitarLike(){
-        //Quitar mi usuario a un array de usuario que likearon.
-            //Updatear el registro (documento)
         db.collection('posts').doc(this.props.postData.id).update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
@@ -81,7 +77,6 @@ class PostUsuario extends Component{
             author: auth.currentUser.email,
             comment: this.state.comment, 
         }
-        //identifacar el documento que queremos modificar.
          db.collection('posts').doc(this.props.postData.id).update({
            comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
         })

@@ -73,7 +73,6 @@ class Post extends Component{
             author: auth.currentUser.email,
             comment: this.state.comment, 
         }
-        //identifacar el documento que queremos modificar.
          db.collection('posts').doc(this.props.postData.id).update({
            comments:firebase.firestore.FieldValue.arrayUnion(oneComment)
         })
