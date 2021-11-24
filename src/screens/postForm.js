@@ -9,8 +9,8 @@ class PostForm extends Component {
         super(props);
         this.state = {  
             textoPost: '',
-            showCamera: true,
-            url: '',
+            showCamera: true, //hacemos un showCamera para que cargue la camara y quede ahi
+            url: '', //traemos la url que nos devolvio la base de datos en la que subimos el archivo.
         };
     }
 
@@ -42,8 +42,8 @@ class PostForm extends Component {
         return (
         <View style={styles.wrap}>
         {
-            this.state.showCamera ?
-            <MyCamera onImageUpload={(url) => {this.onImageUpload(url)}}/> :
+            this.state.showCamera ? //hacemos un if ternario para que pregunte que si el showCamara es verdadero muestre la camara.
+            <MyCamera onImageUpload={(url) => {this.onImageUpload(url)}}/> : //usamos MyCamera para que sea renderizada
         
         <View>
             <Text style={styles.descripcion}>Agrega una descripción:</Text>

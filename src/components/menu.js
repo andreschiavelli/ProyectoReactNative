@@ -35,8 +35,7 @@ class Menu extends Component{
 
     register(email, pass, userName){
         auth.createUserWithEmailAndPassword(email, pass)
-            .then( 
-                (res)=>{
+            .then( (res)=>{
                     console.log(res);
                     res.user.updateProfile({
                         displayName: userName})
