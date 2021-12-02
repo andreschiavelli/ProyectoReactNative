@@ -32,7 +32,7 @@ class Menu extends Component{
             }
         })
     }
-
+//necesitamos saber que pantallas mostrar
     register(email, pass, userName){
         auth.createUserWithEmailAndPassword(email, pass)
             .then( (res)=>{
